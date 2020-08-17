@@ -1,19 +1,18 @@
 use std::collections::HashMap;
 
 struct Transition {
-    target_scene: usize,
+    target_scene: String,
     action_text: String,
 }
 
 struct Scene {
-    id: usize,
+    id: String,
     text: String,
     transitions: Vec<Transition>,
 }
 
 struct Story {
-    scenes: HashMap<usize, Scene>,
-    start_scene: usize,
+    scenes: HashMap<String, Scene>,
 }
 
 fn main() {
