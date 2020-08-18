@@ -32,7 +32,7 @@ impl Story {
                     println!("{}", tr.action_text);
                 }
 
-                println!("");
+                println!();
                 println!("Please enter text what to do:");
                 io::stdin().read_line(&mut line).unwrap();
                 let chosen = line.trim();
