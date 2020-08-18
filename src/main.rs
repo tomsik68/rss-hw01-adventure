@@ -27,6 +27,12 @@ impl Story {
         if !scene.transitions.is_empty() {
             let mut line = String::new();
             let chosen = loop {
+                println!("You have the following choices:");
+                for tr in &scene.transitions {
+                    println!("{}", tr.action_text);
+                }
+
+                println!("");
                 println!("Please enter text what to do:");
                 io::stdin().read_line(&mut line).unwrap();
                 let chosen = line.trim();
