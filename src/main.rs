@@ -20,6 +20,37 @@ struct Story {
     scenes: HashMap<String, Scene>,
 }
 
+impl Story {
+    fn present_scene(&self, scene_id: &str) {
+        let scene = &self.scenes[scene_id];
+        println!("{}", scene.text);
+        if !scene.transitions.is_empty() {
+            let mut line = String::new();
+            let chosen = loop {
+                println!("Please enter text what to do:");
+                io::stdin().read_line(&mut line).unwrap();
+                let chosen = line.trim();
+                let target_scene = scene
+                    .transitions
+                    .iter()
+                    .find(|t| t.action_text == chosen)
+                    .map(|t| &t.target_scene);
+                match target_scene {
+                    None => continue,
+                    Some(x) => break x,
+                }
+            };
+            println!(
+                "--------------------------------------------------------------------------------"
+            );
+            self.present_scene(&chosen);
+        }
+    }
+
+    fn play(&self) {
+        self.present_scene("start");
+    }
+}
 
 fn parse_transitions(line: &str) -> Vec<Transition> {
     line.split(',')
@@ -78,4 +109,5 @@ fn main() {
         .expect("Please supply filename of the story");
 
     let story = parse_story(&filename).expect("unable to parse story");
+    story.play();
 }
