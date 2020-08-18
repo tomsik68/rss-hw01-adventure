@@ -11,7 +11,6 @@ struct Transition {
 }
 
 struct Scene {
-    id: String,
     text: String,
     transitions: Vec<Transition>,
 }
@@ -94,7 +93,6 @@ fn parse_story(filename: &dyn AsRef<Path>) -> io::Result<Story> {
                 scenes.insert(
                     scene_id.clone(),
                     Scene {
-                        id: scene_id,
                         text: scene_text,
                         transitions,
                     },
