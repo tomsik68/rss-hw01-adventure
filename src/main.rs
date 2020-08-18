@@ -60,6 +60,7 @@ impl Story {
 
 fn parse_transitions(line: &str) -> Vec<Transition> {
     line.split(',')
+        .filter(|s| !s.is_empty())
         .map(|t| {
             let mut s = t.split(':');
             Transition {
